@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://dt1pnn883knnb"]
+
+[ext_resource type="PackedScene" uid="uid://b52n8a8r8pvkl" path="res://Player/player.tscn" id="1_1aphj"]
+[ext_resource type="Material" uid="uid://dml1bwg64yvnn" path="res://Materials/Gray.tres" id="2_uauu0"]
+[ext_resource type="Material" uid="uid://bv1x2b4vfvkgh" path="res://Materials/Orange.tres" id="3_l0sbi"]
+[ext_resource type="Material" uid="uid://6jekmasjpab0" path="res://Materials/Green.tres" id="3_l8r4a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tpfk0"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fb862"]
+sky_material = SubResource("ProceduralSkyMaterial_tpfk0")
+
+[sub_resource type="Environment" id="Environment_4lwj4"]
+background_mode = 1
+background_color = Color(0.396078, 0.811765, 0.988235, 1)
+sky = SubResource("Sky_fb862")
+ambient_light_source = 2
+ambient_light_color = Color(0.364706, 0.415686, 0.521569, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7jpgp"]
+size = Vector2(1000, 1000)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.919938, -1.71377e-08, 0.392064, -0.392064, -4.02118e-08, 0.919938, 0, -1, -4.37114e-08, -0.403616, 1.69316, -4.21374)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4lwj4")
+
+[node name="Player" parent="." instance=ExtResource("1_1aphj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+DECEL = 75
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.523, 0, 0)
+material_override = ExtResource("2_uauu0")
+use_collision = true
+size = Vector3(3, 2, 5)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 0)
+material_override = ExtResource("2_uauu0")
+use_collision = true
+size = Vector3(6, 4, 5)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -8, 5, 6)
+material_override = ExtResource("3_l0sbi")
+use_collision = true
+size = Vector3(3, 0.5, 5)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 3.5, 13.5)
+material_override = ExtResource("2_uauu0")
+use_collision = true
+size = Vector3(8, 7, 8)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 3.5, 24)
+material_override = ExtResource("2_uauu0")
+use_collision = true
+size = Vector3(8, 7, 3)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+material_override = ExtResource("3_l8r4a")
+use_collision = true
+mesh = SubResource("PlaneMesh_7jpgp")
